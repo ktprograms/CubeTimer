@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">CubeTimer</string>
+
+    <string-array name="puzzle_list">
+        <item>2x2</item>
+        <item>3x3</item>
+        <item>4x4</item>
+        <item>5x5</item>
+        <item>6x6</item>
+        <item>7x7</item>
+        <item>Pyra</item>
+        <item>SQ-1</item>
+        <item>Mega</item>
+        <item>Clock</item>
+        <item>Skewb</item>
+    </string-array>
+</resources>

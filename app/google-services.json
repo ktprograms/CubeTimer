@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "573155457535",
+    "firebase_url": "https://cubetimer-59f74.firebaseio.com",
+    "project_id": "cubetimer-59f74",
+    "storage_bucket": "cubetimer-59f74.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:573155457535:android:0ef146b0c154719d40cfca",
+        "android_client_info": {
+          "package_name": "com.ktcuber.cubetimer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "573155457535-9h5pc1526b18ji4lavu05c7oqvcoc80a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5Qr2gJLa7Am2WCSpNpR3HGsmQG8vT2Ag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "573155457535-9h5pc1526b18ji4lavu05c7oqvcoc80a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,2 @@
+include ':app', ':svg-android-1.1', ':scrambler-min2phase-0.18.0', ':scrambler-sq12phase-0.18.0', ':scrambler-threephase-0.18.0', ':lib-svglite-0.18.0', ':lib-scrambles-0.18.0'
+rootProject.name='CubeTimer'
