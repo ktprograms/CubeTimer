@@ -10,4 +10,3 @@ Android Studio Project for my Rubik's Cube Timer App which utilizes TNoodle-lib 
 **0.6.7-beta:** Fixed spinner bug not returning to previous selection on solve list activity restart
 
 **0.6.6-beta:** Initial public app release
-+
