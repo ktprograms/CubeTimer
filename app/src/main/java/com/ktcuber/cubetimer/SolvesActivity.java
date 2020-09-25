@@ -48,7 +48,39 @@ public class SolvesActivity extends AppCompatActivity {
     ListView solvesListView;
     Spinner sPuzzleSpinner;
 
-    ValueEventListener valueEventListener;
+    ValueEventListener valueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            times.clear();
+            scrambles.clear();
+            penalties.clear();
+            ids.clear();
+            ts.clear();
+            String p;
+            for (DataSnapshot solveSnapshot: snapshot.getChildren()) {
+                t = Long.parseLong(solveSnapshot.child("Time").getValue().toString());
+                ts.add(solveSnapshot.child("Time").getValue().toString());
+                scrambles.add(solveSnapshot.child("Scramble").getValue().toString());
+                penalties.add(p = solveSnapshot.child("Penalty").getValue().toString());
+                ids.add(solveSnapshot.getKey());
+                String time = formatTime(t);
+                if (p.equals("DNF")) {
+                    times.add("DNF(" + time + ")");
+                } else if (p.equals("+2")) {
+                    times.add(formatTimePT(time));
+                } else {
+                    times.add(time);
+                }
+            }
+
+            fc.onCallback(times, scrambles, penalties);
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+    };;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +128,7 @@ public class SolvesActivity extends AppCompatActivity {
 
                 solvesRef = userRef.child(puzzleString);
 
-                solvesRef.addValueEventListener(valueEventListener);
+                solvesRef.addListenerForSingleValueEvent(valueEventListener);
             }
 
             @Override
@@ -114,41 +146,7 @@ public class SolvesActivity extends AppCompatActivity {
         ids = new ArrayList<>();
         ts = new ArrayList<>();
 
-        valueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                times.clear();
-                scrambles.clear();
-                penalties.clear();
-                ids.clear();
-                ts.clear();
-                String p;
-                for (DataSnapshot solveSnapshot: snapshot.getChildren()) {
-                    t = Long.parseLong(solveSnapshot.child("Time").getValue().toString());
-                    ts.add(solveSnapshot.child("Time").getValue().toString());
-                    scrambles.add(solveSnapshot.child("Scramble").getValue().toString());
-                    penalties.add(p = solveSnapshot.child("Penalty").getValue().toString());
-                    ids.add(solveSnapshot.getKey());
-                    String time = formatTime(t);
-                    if (p.equals("DNF")) {
-                        times.add("DNF(" + time + ")");
-                    } else if (p.equals("+2")) {
-                        times.add(formatTimePT(time));
-                    } else {
-                        times.add(time);
-                    }
-                }
-
-                fc.onCallback(times, scrambles, penalties);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-
-        solvesRef.addValueEventListener(valueEventListener);
+        solvesRef.addListenerForSingleValueEvent(valueEventListener);
     }
 
     private interface FirebaseCallback {
@@ -201,6 +199,7 @@ public class SolvesActivity extends AppCompatActivity {
                 String returnedResult = data.getData().toString();
                 //System.out.println("result");
                 sPuzzleSpinner.setSelection(puzzles.indexOf(returnedResult), true);
+                solvesRef.addListenerForSingleValueEvent(valueEventListener);
             }
         }
     }

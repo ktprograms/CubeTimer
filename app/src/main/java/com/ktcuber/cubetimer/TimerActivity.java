@@ -404,7 +404,7 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     private void stuff() {
-        System.out.println(scramble.length());
+        //System.out.println(scramble.length());
         tImageView.setImageDrawable(null);
         try {
             currentScramble = scramble;

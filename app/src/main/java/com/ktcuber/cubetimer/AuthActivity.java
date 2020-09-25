@@ -53,8 +53,7 @@ public class AuthActivity extends AppCompatActivity {
         AuthHomeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent authMainIntent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(authMainIntent);
+                finish();
             }
         });
 
