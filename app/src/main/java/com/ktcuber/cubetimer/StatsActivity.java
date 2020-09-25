@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class StatsActivity extends AppCompatActivity {
     String puzzleString;
     String uid;
     ArrayList<String> times;
+    List<String> puzzles;
 
     Spinner stPuzzleSpinner;
 
@@ -63,6 +65,8 @@ public class StatsActivity extends AppCompatActivity {
             }
         };
 
+        puzzles = Arrays.asList(getResources().getStringArray(R.array.wca_puzzle_list));
+
         uid = currentUser.getUid();
         userRef = firebaseDatabase.getReference(uid);
 
@@ -86,31 +90,7 @@ public class StatsActivity extends AppCompatActivity {
         stPuzzleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("HI");
-
-                if (position == 0) {
-                    puzzleString = "Two";
-                } else if (position == 1) {
-                    puzzleString = "Three";
-                } else if (position == 2) {
-                    puzzleString = "Four";
-                } else if (position == 3) {
-                    puzzleString = "Five";
-                } else if (position == 4) {
-                    puzzleString = "Six";
-                } else if (position == 5) {
-                    puzzleString = "Seven";
-                } else if (position == 6) {
-                    puzzleString = "Pyra";
-                } else if (position == 7) {
-                    puzzleString = "Squan";
-                } else if (position == 8) {
-                    puzzleString = "Mega";
-                } else if (position == 9) {
-                    puzzleString = "Clock";
-                } else if (position == 10) {
-                    puzzleString = "Skewb";
-                }
+                puzzleString = puzzles.get(position);
 
                 hideTextViews();
 

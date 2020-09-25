@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -40,6 +41,7 @@ public class SolvesActivity extends AppCompatActivity {
     ArrayList<String> penalties;
     ArrayList<String> ids;
     ArrayList<String> ts;
+    List<String> puzzles;
 
     FirebaseCallback fc;
 
@@ -62,6 +64,8 @@ public class SolvesActivity extends AppCompatActivity {
             }
         };
 
+        puzzles = Arrays.asList(getResources().getStringArray(R.array.wca_puzzle_list));
+
         uid = currentUser.getUid();
         userRef = firebaseDatabase.getReference(uid);
 
@@ -77,7 +81,7 @@ public class SolvesActivity extends AppCompatActivity {
                 solvesSolveIntent.putExtra("com.example.timerapp.PENALTY", penalties.get(position));
                 solvesSolveIntent.putExtra("com.example.timerapp.PUZZLE", puzzleString);
                 solvesSolveIntent.putExtra("com.example.timerapp.ID", ids.get(position));
-                startActivity(solvesSolveIntent);
+                startActivityForResult(solvesSolveIntent, 1);
             }
         });
 
@@ -88,35 +92,11 @@ public class SolvesActivity extends AppCompatActivity {
         sPuzzleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("HI");
-
-                if (position == 0) {
-                    puzzleString = "Two";
-                } else if (position == 1) {
-                    puzzleString = "Three";
-                } else if (position == 2) {
-                    puzzleString = "Four";
-                } else if (position == 3) {
-                    puzzleString = "Five";
-                } else if (position == 4) {
-                    puzzleString = "Six";
-                } else if (position == 5) {
-                    puzzleString = "Seven";
-                } else if (position == 6) {
-                    puzzleString = "Pyra";
-                } else if (position == 7) {
-                    puzzleString = "Squan";
-                } else if (position == 8) {
-                    puzzleString = "Mega";
-                } else if (position == 9) {
-                    puzzleString = "Clock";
-                } else if (position == 10) {
-                    puzzleString = "Skewb";
-                }
+                puzzleString = puzzles.get(position);
 
                 solvesRef = userRef.child(puzzleString);
 
-                solvesRef.addListenerForSingleValueEvent(valueEventListener);
+                solvesRef.addValueEventListener(valueEventListener);
             }
 
             @Override
@@ -168,7 +148,7 @@ public class SolvesActivity extends AppCompatActivity {
             }
         };
 
-        solvesRef.addListenerForSingleValueEvent(valueEventListener);
+        solvesRef.addValueEventListener(valueEventListener);
     }
 
     private interface FirebaseCallback {
@@ -207,10 +187,21 @@ public class SolvesActivity extends AppCompatActivity {
         return tDisplay;
     }
 
-    @Override
+    /*@Override
     public void onRestart() {
         super.onRestart();
         finish();
         startActivity(getIntent());
+    }*/
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                String returnedResult = data.getData().toString();
+                //System.out.println("result");
+                sPuzzleSpinner.setSelection(puzzles.indexOf(returnedResult), true);
+            }
+        }
     }
 }

@@ -33,6 +33,8 @@ import org.worldcubeassociation.tnoodle.scrambles.PuzzleRegistry;
 import org.worldcubeassociation.tnoodle.svglite.Svg;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class TimerActivity extends AppCompatActivity {
@@ -60,6 +62,7 @@ public class TimerActivity extends AppCompatActivity {
     String formatSeconds;
     String formatMilliseconds;
     String tDisplay;
+    List<String> puzzles;
     long time;
     long startTimeMillis;
     boolean dnf = false;
@@ -81,6 +84,8 @@ public class TimerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_timer);
         getSupportActionBar().hide();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        puzzles = Arrays.asList(getResources().getStringArray(R.array.wca_puzzle_list));
 
         uid = user.getUid();
         userRef = firebaseDatabase.getReference(uid);
@@ -108,38 +113,29 @@ public class TimerActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
                     puzzle = PuzzleRegistry.TWO;
-                    puzzleString = "Two";
                 } else if (position == 1) {
                     puzzle = PuzzleRegistry.THREE;
-                    puzzleString = "Three";
                 } else if (position == 2) {
                     puzzle = PuzzleRegistry.FOUR;
-                    puzzleString = "Four";
                 } else if (position == 3) {
                     puzzle = PuzzleRegistry.FIVE;
-                    puzzleString = "Five";
                 } else if (position == 4) {
                     puzzle = PuzzleRegistry.SIX;
-                    puzzleString = "Six";
                 } else if (position == 5) {
                     puzzle = PuzzleRegistry.SEVEN;
-                    puzzleString = "Seven";
                 } else if (position == 6) {
                     puzzle = PuzzleRegistry.PYRA;
-                    puzzleString = "Pyra";
                 } else if (position == 7) {
                     puzzle = PuzzleRegistry.SQ1;
-                    puzzleString = "Squan";
                 } else if (position == 8) {
                     puzzle = PuzzleRegistry.MEGA;
-                    puzzleString = "Mega";
                 } else if (position == 9) {
                     puzzle = PuzzleRegistry.CLOCK;
-                    puzzleString = "Clock";
                 } else if (position == 10) {
                     puzzle = PuzzleRegistry.SKEWB;
-                    puzzleString = "Skewb";
                 }
+
+                puzzleString = puzzles.get(position);
 
                 hideBtns();
                 scramble = puzzle.getScrambler().generateScramble();

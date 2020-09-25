@@ -71,12 +71,12 @@ public class AuthActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
-                                Log.d("AUTH", "createUserWithEmail:success");
+                                //Log.d("AUTH", "createUserWithEmail:success");
                                 FirebaseUser currentUser = mAuth.getCurrentUser();
                                 updateUI(currentUser);
                             } else {
                                 // If sign in fails, display a message to the user.
-                                Log.w("AUTH", "createUserWithEmail:failure", task.getException());
+                                //Log.w("AUTH", "createUserWithEmail:failure", task.getException());
                                 Toast.makeText(AuthActivity.this, "Authentication failed : " + task.getException(),
                                         Toast.LENGTH_SHORT).show();
                                 updateUI(null);
@@ -100,12 +100,12 @@ public class AuthActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
-                                Log.d("AUTH", "signInUserWithEmail:success");
+                                //Log.d("AUTH", "signInUserWithEmail:success");
                                 FirebaseUser currentUser = mAuth.getCurrentUser();
                                 updateUI(currentUser);
                             } else {
                                 // If sign in fails, display a message to the user.
-                                Log.w("AUTH", "signInUserWithEmail:failure", task.getException());
+                                //Log.w("AUTH", "signInUserWithEmail:failure", task.getException());
                                 Toast.makeText(AuthActivity.this, "Authentication failed : " + task.getException(),
                                         Toast.LENGTH_SHORT).show();
                                 updateUI(null);
@@ -125,7 +125,7 @@ public class AuthActivity extends AppCompatActivity {
                     mAuth.signOut();
                     updateUI(null);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
             }
         });

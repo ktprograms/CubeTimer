@@ -14,4 +14,18 @@
         <item>Clock</item>
         <item>Skewb</item>
     </string-array>
+
+    <string-array name="wca_puzzle_list">
+        <item>Two</item>
+        <item>Three</item>
+        <item>Four</item>
+        <item>Five</item>
+        <item>Six</item>
+        <item>Seven</item>
+        <item>Pyra</item>
+        <item>Squan</item>
+        <item>Mega</item>
+        <item>Clock</item>
+        <item>Skewb</item>
+    </string-array>
 </resources>

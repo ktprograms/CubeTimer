@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -170,7 +171,9 @@ public class SolveActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 solveRef.removeValue();
-                                setResult(Activity.RESULT_OK, new Intent().putExtra("com.example.timerapp.SOLVEPUZZLE", puzzleString));
+                                Intent puzzle = new Intent();
+                                puzzle.setData(Uri.parse(puzzleString));
+                                setResult(RESULT_OK, puzzle);
                                 finish();
                             }
                         });
@@ -280,5 +283,14 @@ public class SolveActivity extends AppCompatActivity {
         }
 
         return null;
+    }
+
+    @Override
+    public void onBackPressed() {
+        //System.out.println("Back Pressed");
+        Intent puzzle = new Intent();
+        puzzle.setData(Uri.parse(puzzleString));
+        setResult(RESULT_OK, puzzle);
+        finish();
     }
 }
