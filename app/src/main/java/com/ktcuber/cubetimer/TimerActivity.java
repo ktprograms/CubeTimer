@@ -138,7 +138,8 @@ public class TimerActivity extends AppCompatActivity {
                 puzzleString = puzzles.get(position);
 
                 hideBtns();
-                scramble = puzzle.getScrambler().generateScramble();
+                sT = new scrambleThread();
+                sT.start();
                 doStuff();
                 /*scramble = puzzle.getScrambler().generateScramble();
                 imageView.setImageDrawable(null);
@@ -384,6 +385,7 @@ public class TimerActivity extends AppCompatActivity {
     public void doStuff() {
         if (scramble.equals(currentScramble)) {
             try {
+                tImageView.setImageDrawable(null);
                 tScrambleTextView.setText("Generating scramble... ");
                 tScrambleBtn.setText("Generating scramble... ");
                 tScrambleBtn.setEnabled(false);
