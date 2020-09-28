@@ -4,6 +4,11 @@ Android Studio Project for my Rubik's Cube Timer App which utilizes TNoodle-lib 
 ## Links
 [Download the newest APK](https://github.com/ktprograms/CubeTimer/blob/master/app/release/CubeTimer0.6.9beta.apk)
 
+### Latest APK checksums
+MD5: 0cbad72ff2663e5d4ab00233406719de
+
+SHA1: 42ca2ec941243248067d222c32569f9ec5b3261b
+
 [All APK Versions](https://github.com/ktprograms/CubeTimer/blob/master/app/release)
 
 [My Google sites page](http://sites.google.com/view/ktcubertimer/home)
